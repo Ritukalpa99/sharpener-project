@@ -13,14 +13,7 @@ function submitEvent(event) {
     price: price,
     quantity: quantity,
   };
-  //   axios
-  //     .post(
-  //       "https://crudcrud.com/api/5e6312f37b7041febc10480daceb55ec/AppointmentData/",
-  //       obj
-  //     )
-  //     .then()
-  //     .catch((err) => console.log(err));
-  // console.log(obj);
+  
   saveDetails(obj);
   showDetails(obj);
   form.reset();
@@ -28,7 +21,7 @@ function submitEvent(event) {
 const saveDetails = async (obj) => {
   try {
     const data = await axios.post(
-      "https://crudcrud.com/api/429de822cef44c0e9bb22d42bb6b98f3/CandyData",
+      "https://crudcrud.com/api/fe5d546dfca045dbbfe21884c6973147/CandyData",
       obj
     );
   } catch (err) {
@@ -39,21 +32,18 @@ const saveDetails = async (obj) => {
 const getDetails = async (id) => {
   try {
     const res = await axios.get(
-      `https://crudcrud.com/api/429de822cef44c0e9bb22d42bb6b98f3/CandyData/${id}`
+      `https://crudcrud.com/api/fe5d546dfca045dbbfe21884c6973147/CandyData/${id}`
     );
     console.log(res.data);
-    // const { _id,name, desc, price, quantity} = await res.data;
-    // console.log(_id,name, desc, price, quantity);
-    // return data;
   } catch (err) {
     console.log(err);
   }
 };
 
-window.addEventListener("DOMContentLoaded", async () => {
+const refresh = async () => {
   try {
     const res = await axios.get(
-      "https://crudcrud.com/api/429de822cef44c0e9bb22d42bb6b98f3/CandyData"
+      "https://crudcrud.com/api/fe5d546dfca045dbbfe21884c6973147/CandyData"
     );
 
     for (let i = 0; i < res.data.length; i++) {
@@ -62,7 +52,9 @@ window.addEventListener("DOMContentLoaded", async () => {
   } catch (err) {
     console.log(err);
   }
-});
+}
+
+window.addEventListener("DOMContentLoaded", refresh);
 
 function showDetails(obj) {
   const { _id, name, desc, price, quantity } = obj;
@@ -79,26 +71,21 @@ function showDetails(obj) {
   addOne.appendChild(document.createTextNode("Buy One"));
   addOne.onclick = async () => {
     try {
-      // const res = await axios.get(
-      //     `https://crudcrud.com/api/429de822cef44c0e9bb22d42bb6b98f3/CandyData/${_id}`
-      //   );
+      const newQuantity = String(quantity - 1);
       const newObj = {
-        _id: _id,
         name: name,
         desc: desc,
-        price: price - 1,
-        quantity: quantity,
+        price: price,
+        quantity: newQuantity,
       };
       const update = await axios.put(
-        `https://crudcrud.com/api/429de822cef44c0e9bb22d42bb6b98f3/CandyData/${_id}`,
+        `https://crudcrud.com/api/fe5d546dfca045dbbfe21884c6973147/CandyData/${_id}`,
         newObj
       );
-      // console.log(newObj);
-      /*const del = await axios.delete(
-      `https://crudcrud.com/api/429de822cef44c0e9bb22d42bb6b98f3/CandyData/${_id}`
-    );*/
-
-      /*const updateData = await saveDetails(newObj);*/
+      while (ul.hasChildNodes()) {
+        ul.removeChild(ul.firstChild);
+      }
+      refresh();
     } catch (err) {
       console.log(err);
     }
@@ -106,33 +93,55 @@ function showDetails(obj) {
 
   addTwo.append(document.createTextNode("Buy Two"));
   addTwo.className = "btn btn-info m-2 float-end";
-  addTwo.onclick = () => {
-    // axios
-    //   .get(
-    //     `https://crudcrud.com/api/5e6312f37b7041febc10480daceb55ec/AppointmentData/${_id}`
-    //   )
-    //   .then((res) => {
-    //     const { name, desc, price } = res.data;
-    //     let n = document.getElementById("name");
-    //     let e = document.getElementById("desc");
-    //     let p = document.getElementById("price");
-    //     n.value = name;
-    //     e.value = desc;
-    //     p.value = price;
-    //   })
-    //   .catch((err) => console.log(err));
-    // axios
-    //   .delete(
-    //     `https://crudcrud.com/api/5e6312f37b7041febc10480daceb55ec/AppointmentData/${_id}`
-    //   )
-    //   .then((res) => ul.removeChild(li))
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
+  addTwo.onclick = async () => {
+    try {
+      const newQuantity = String(quantity - 2);
+      const newObj = {
+        name: name,
+        desc: desc,
+        price: price,
+        quantity: newQuantity,
+      };
+      const update = await axios.put(
+        `https://crudcrud.com/api/fe5d546dfca045dbbfe21884c6973147/CandyData/${_id}`,
+        newObj
+      );
+      while (ul.hasChildNodes()) {
+        ul.removeChild(ul.firstChild);
+      }
+      refresh();
+    } catch (err) {
+      console.log(err);
+    }
   };
 
-  li.appendChild(addOne);
+  addThree.append(document.createTextNode("Buy Three"));
+  addThree.className = "btn btn-info m-2 float-end";
+  addThree.onclick = async () => {
+    try {
+      const newQuantity = String(quantity - 3);
+      const newObj = {
+        name: name,
+        desc: desc,
+        price: price,
+        quantity: newQuantity,
+      };
+      const update = await axios.put(
+        `https://crudcrud.com/api/fe5d546dfca045dbbfe21884c6973147/CandyData/${_id}`,
+        newObj
+      );
+      while (ul.hasChildNodes()) {
+        ul.removeChild(ul.firstChild);
+      }
+      refresh();
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  li.appendChild(addThree);
   li.appendChild(addTwo);
+  li.appendChild(addOne);
   li.className = "list-group-item";
   ul.appendChild(li);
 }
