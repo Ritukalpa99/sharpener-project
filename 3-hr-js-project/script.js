@@ -16,7 +16,7 @@ function saveDetails(e) {
     localStorage.setItem(desc, data_serialized);
 
     let display = `${amount} ${desc} ${category}`;
-    let ul = document.getElementById('users');
+    let ul = document.getElementById('items');
     let li = document.createElement('li');
     li.appendChild(document.createTextNode(display));
     // Delete button
@@ -37,7 +37,7 @@ function saveDetails(e) {
         let n = document.getElementById('amount');
         let e = document.getElementById('desc');
         let p = document.getElementById('category');
-        console.log(getData);
+        // console.log(getData);
         localStorage.removeItem(desc);
         ul.removeChild(li);
         n.value = getData.amount;
