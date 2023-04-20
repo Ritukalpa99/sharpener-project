@@ -21,7 +21,7 @@ function submitEvent(event) {
 const saveDetails = async (obj) => {
   try {
     const data = await axios.post(
-      "https://crudcrud.com/api/fe5d546dfca045dbbfe21884c6973147/CandyData",
+      "https://crudcrud.com/api/17180b2d4c9e4f90a3af4307b34043ed/CandyData",
       obj
     );
   } catch (err) {
@@ -32,7 +32,7 @@ const saveDetails = async (obj) => {
 const getDetails = async (id) => {
   try {
     const res = await axios.get(
-      `https://crudcrud.com/api/fe5d546dfca045dbbfe21884c6973147/CandyData/${id}`
+      `https://crudcrud.com/api/17180b2d4c9e4f90a3af4307b34043ed/CandyData/${id}`
     );
     console.log(res.data);
   } catch (err) {
@@ -43,7 +43,7 @@ const getDetails = async (id) => {
 const refresh = async () => {
   try {
     const res = await axios.get(
-      "https://crudcrud.com/api/fe5d546dfca045dbbfe21884c6973147/CandyData"
+      "https://crudcrud.com/api/17180b2d4c9e4f90a3af4307b34043ed/CandyData"
     );
 
     for (let i = 0; i < res.data.length; i++) {
@@ -79,7 +79,7 @@ function showDetails(obj) {
         quantity: newQuantity,
       };
       const update = await axios.put(
-        `https://crudcrud.com/api/fe5d546dfca045dbbfe21884c6973147/CandyData/${_id}`,
+        `https://crudcrud.com/api/17180b2d4c9e4f90a3af4307b34043ed/CandyData/${_id}`,
         newObj
       );
       while (ul.hasChildNodes()) {
@@ -103,7 +103,7 @@ function showDetails(obj) {
         quantity: newQuantity,
       };
       const update = await axios.put(
-        `https://crudcrud.com/api/fe5d546dfca045dbbfe21884c6973147/CandyData/${_id}`,
+        `https://crudcrud.com/api/17180b2d4c9e4f90a3af4307b34043ed/CandyData/${_id}`,
         newObj
       );
       while (ul.hasChildNodes()) {
@@ -127,7 +127,7 @@ function showDetails(obj) {
         quantity: newQuantity,
       };
       const update = await axios.put(
-        `https://crudcrud.com/api/fe5d546dfca045dbbfe21884c6973147/CandyData/${_id}`,
+        `https://crudcrud.com/api/17180b2d4c9e4f90a3af4307b34043ed/CandyData/${_id}`,
         newObj
       );
       while (ul.hasChildNodes()) {
